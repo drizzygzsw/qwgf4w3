@@ -1,0 +1,74 @@
+local image = script.Parent
+local Rotate 
+local Button = script.Parent.Parent.Open
+local On = false
+local rpm = 4000
+local BallExtender = script.parent.parent.parent.parent.Player["Ball Extender"]
+local Speed = script.parent.parent.parent.parent.Player.Speed
+local Noclip = script.parent.parent.parent.parent.Player.Noclip
+local Open = script.parent.parent.parent.parent.Player.Main.Open
+local ArmExtender = script.parent.parent.parent.parent.Player["Arm Extender"]
+local AutoIB = script.parent.parent.parent.parent.Player.AutoIB
+local AutoTime = script.parent.parent.parent.parent.Player.AutoTime
+local Teleport = script.parent.parent.parent.parent.Player.Teleport
+
+Button.MouseButton1Click:Connect(function()
+	if On == false then
+
+		Rotate = game:GetService("RunService").RenderStepped:Connect(function()
+			for i=1,math.ceil((rpm/60)/60) do
+				image.Rotation = image.Rotation + 1
+				if image.Rotation == 45 then
+					On = true
+					Rotate:Disconnect()
+					wait(0.45)
+					BallExtender.Visible = true
+					wait(0.17)
+					Speed.Visible = true
+					wait(0.17)
+					Noclip.Visible = true
+					wait(0.17)
+					ArmExtender.Visible = true
+					wait(0.17)
+					AutoTime.Visible = true
+					wait(0.17)
+					Teleport.Visible = true
+					wait(0.17)
+					AutoIB.Visible = true
+					wait(0.17)
+				end
+			end
+
+
+		end)
+	end
+end)
+Button.MouseButton1Click:Connect(function()
+	if On == true then
+		Rotate = game:GetService("RunService").RenderStepped:Connect(function()
+			for i=1,math.ceil((rpm/60)/60) do
+				image.Rotation = image.Rotation - 1
+				if image.Rotation == 0 then 
+					On = false
+					Rotate:Disconnect()
+					wait(0.45)
+					AutoIB.Visible = false
+					wait(0.17)
+					Teleport.Visible = false
+					wait(0.17)
+					AutoTime.Visible = false
+					wait(0.17)
+					ArmExtender.Visible = false
+					wait(0.17)
+					Noclip.Visible = false
+					wait(0.17)
+					Speed.Visible = false
+					wait(0.17)
+					BallExtender.Visible = false
+					wait(0.17)
+				end
+			end
+
+		end)
+	end
+end)
