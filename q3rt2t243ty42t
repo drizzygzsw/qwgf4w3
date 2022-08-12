@@ -1,0 +1,23 @@
+local stopKICK
+stopKICK = hookmetamethod(game,"__namecall",function(self,...)
+    local ncm = getnamecallmethod()
+    if ncm == "BreakJoints" then
+        return "fucking donkey"
+    end
+    return stopKICK(self,...)
+end)
+
+
+
+local old
+local hum = game.Players.LocalPlayer.Character.Humanoid
+old = hookmetamethod(game,"__namecall",function(remote,...)
+    local args = {...}
+    local ncm = getnamecallmethod()
+    if ncm == "FireServer" and args[1] == "Guard" and args[2] == false then -- if we are sprinting
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Toggles.PostSpeed.Value
+    elseif ncm == "FireServer" and args[1] == "Guard" and args[2] == true then
+hum.WalkSpeed = 10.5
+    end
+    return old(remote,...)
+end)
